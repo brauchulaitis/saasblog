@@ -2,7 +2,8 @@ class CheckoutController < ApplicationController
 
   def create
     @session = Stripe::Checkout::Session.create({
-      success_url: posts_url,
+    customer: current_user.stripe_customer_id,
+    success_url: posts_url,
       line_items: [
         {price: 'price_1OHlJNCzVNhathB8pWk4Kadl', quantity: 1},
       ],
